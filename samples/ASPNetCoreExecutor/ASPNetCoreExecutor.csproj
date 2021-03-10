@@ -5,6 +5,18 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <Compile Remove="TestJobHandler.cs" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="10.ps" />
+      <None Remove="10.ps1" />
+      <None Remove="11.sh" />
+      <None Remove="12.py" />
+      <None Remove="13.js" />
+    </ItemGroup>
+
+    <ItemGroup>
         <PackageReference Include="Microsoft.CodeAnalysis.Common" Version="3.9.0" />
         <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.9.0" />
         <PackageReference Include="Microsoft.Extensions.Logging.Console">
