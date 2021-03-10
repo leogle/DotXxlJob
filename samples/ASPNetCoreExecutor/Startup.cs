@@ -26,7 +26,8 @@ namespace ASPNetCoreExecutor
             services.AddDefaultXxlJobHandlers();// add httpHandler;
 
             services.AddSingleton<IJobHandler, DemoJobHandler>(); // 添加自定义的jobHandler
-            
+            services.AddSingleton<IJobHandler, TestJobHandler>();
+
             services.AddAutoRegistry(); // 自动注册
 
 

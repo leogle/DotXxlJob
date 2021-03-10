@@ -5,6 +5,8 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="Microsoft.CodeAnalysis.Common" Version="3.9.0" />
+        <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.9.0" />
         <PackageReference Include="Microsoft.Extensions.Logging.Console">
           <Version>2.2.0</Version>
         </PackageReference>       
@@ -23,5 +25,11 @@
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </Content>
     </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Handler\" />
+    </ItemGroup>
+
+    <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="https://beaujs.com/schema.json" /></VisualStudio></ProjectExtensions>
 
 </Project>

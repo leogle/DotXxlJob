@@ -55,7 +55,10 @@ namespace DotXxlJob.Core
             services.AddSingleton<CallbackTaskQueue>();
             services.AddSingleton<AdminClient>();
             services.AddSingleton<ITaskExecutor, TaskExecutors.BeanTaskExecutor>();
-            
+            services.AddSingleton<ITaskExecutor, TaskExecutors.PowerShellGlueExecutor>();
+            services.AddSingleton<ITaskExecutor, TaskExecutors.ShellGlueExecutor>();
+            services.AddSingleton<ITaskExecutor, TaskExecutors.NodeGlueExecutor>();
+            services.AddSingleton<ITaskExecutor, TaskExecutors.PythonGlueExecutor>();
             return services;
         }
        
