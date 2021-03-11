@@ -12,14 +12,14 @@
       <PackageId>DotXxlJob.Core</PackageId>
       <Version>$(DotXxlJobPackageVersion)</Version>
       <PackageTags>Hession,xxl-job,DotXxlJob</PackageTags>
-      <PackageReleaseNotes>
-       $(DotXxlJobPackageNotes)
-      </PackageReleaseNotes>
-      <PackageProjectUrl>https://github.com/xuanye/DotXxlJob</PackageProjectUrl>
+      <PackageReleaseNotes>添加Glue脚本处理
+</PackageReleaseNotes>
+      <PackageProjectUrl>https://github.com/leogle/DotXxlJob</PackageProjectUrl>
       <PackageLicense>https://github.com/xuanye/DotXxlJob/blob/master/LICENSE</PackageLicense>
       <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
       <RepositoryType>git</RepositoryType>
-      <RepositoryUrl>https://github.com/xuanye/DotXxlJob</RepositoryUrl>
+      <RepositoryUrl>https://github.com/leogle/DotXxlJob</RepositoryUrl>
+      <AssemblyVersion>2.0.3.0</AssemblyVersion>
     </PropertyGroup>
 
     <ItemGroup>

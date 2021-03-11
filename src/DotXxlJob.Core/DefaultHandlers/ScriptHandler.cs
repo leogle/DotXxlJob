@@ -23,7 +23,7 @@ namespace DotXxlJob.Core.DefaultHandlers
             }
             ProcessStartInfo processStartInfo = new ProcessStartInfo();
             processStartInfo.FileName = GetCmd(context.GlueType);
-            processStartInfo.Arguments = "./"+fileName+" "+context.ShardIndex+" "+context.ShardTotal;
+            processStartInfo.Arguments = $"./{fileName} \"{context.JobParameter}\" {context.ShardIndex} {context.ShardTotal}";
             processStartInfo.RedirectStandardOutput = true;
             if (context.GlueType != "GLUE_POWERSHELL")
             {
