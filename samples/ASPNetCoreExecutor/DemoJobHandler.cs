@@ -14,7 +14,7 @@ namespace ASPNetCoreExecutor
         {
             context.JobLogger.Log("receive demo job handler,parameter:{0}",context.JobParameter);
 
-            return Task.FromResult(ReturnT.SUCCESS);
+            return Task.FromResult(ReturnT.FAIL);
         }
     }
 }
