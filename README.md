@@ -1,9 +1,10 @@
 # DotXxlJob
-xxl-job的dotnet core 最新执行器实现，支持XXL-JOB 2.2+ 
-> 注意XXL-JOB 2.0.1版本请使用 1.0.8的执行器实现 ，*xxl-job* 从 2.0.2 到2.2版本又使用了xxl-rpc的新协议，本执行器不做支持，确实需要的朋友请自行fork.. 
-2.0.2添加了以下功能：
+xxl-job的dotnet core 最新执行器实现，支持XXL-JOB 2.2
+本版本与xuxueli/xxl-job原版修改内容在于：
 1、glue脚本执行器
 2、对分片广播功能的支持
+3、支持XXL-JOB2.3重写查看执行日志接口数据新定义
+4、修改中间件防止其他Post请求不可用
 
 ## 1 XXL-JOB概述
 [XXL-JOB][1]是一个轻量级分布式任务调度平台，其核心设计目标是开发迅速、学习简单、轻量级、易扩展。现已开放源代码并接入多家公司线上产品线，开箱即用。以下是它的架构图
@@ -26,7 +27,7 @@ xxl-job的dotnet core 最新执行器实现，支持XXL-JOB 2.2+
 
 ### 3.1 在AspNetCore中使用
 
-1. 声明一个AspNet的Middleware中间件,并扩展ApplicationBuilder，本质是拦截Post请求，解析Body中的流信息
+1. 声明一个AspNet的Middleware中间件,并扩展ApplicationBuilder，过滤xxljob的请求
 
 ```
  public class XxlJobExecutorMiddleware
@@ -35,11 +36,13 @@ xxl-job的dotnet core 最新执行器实现，支持XXL-JOB 2.2+
         private readonly RequestDelegate _next;
 
         private readonly XxlRestfulServiceHandler _rpcService;
+        private List<string> _inceptorUrls;
         public XxlJobExecutorMiddleware(IServiceProvider provider, RequestDelegate next)
         {
             this._provider = provider;
             this._next = next;
             this._rpcService = _provider.GetRequiredService<XxlRestfulServiceHandler>();
+            this._inceptorUrls.AddRange(new string[]{ "/run", "/idleBeat", "/beat", "/kill", "/log" });
         }
 
 
@@ -49,6 +52,7 @@ xxl-job的dotnet core 最新执行器实现，支持XXL-JOB 2.2+
 
             if ("POST".Equals(context.Request.Method, StringComparison.OrdinalIgnoreCase)
                 && !string.IsNullOrEmpty(contentType)
+                && _inceptorUrls.Contains(context.Request.Path.Value)
                 && contentType.ToLower().StartsWith("application/json"))
             {
             

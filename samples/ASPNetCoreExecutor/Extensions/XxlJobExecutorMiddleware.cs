@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Threading.Tasks;
@@ -14,11 +15,13 @@ namespace ASPNetCoreExecutor
         private readonly RequestDelegate _next;
 
         private readonly XxlRestfulServiceHandler _rpcService;
+        private List<string> _inceptorUrls;
         public XxlJobExecutorMiddleware(IServiceProvider provider, RequestDelegate next)
         {
             this._provider = provider;
             this._next = next;
             this._rpcService = _provider.GetRequiredService<XxlRestfulServiceHandler>();
+            this._inceptorUrls.AddRange(new string[]{ "/run", "/idleBeat", "/beat", "/kill", "/log" });
         }
 
 
@@ -28,6 +31,7 @@ namespace ASPNetCoreExecutor
 
             if ("POST".Equals(context.Request.Method, StringComparison.OrdinalIgnoreCase)
                 && !string.IsNullOrEmpty(contentType)
+                && _inceptorUrls.Contains(context.Request.Path.Value)
                 && contentType.ToLower().StartsWith("application/json"))
             {
 

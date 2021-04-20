@@ -40,8 +40,6 @@ namespace DotXxlJob.Core
 
         public async Task HandlerAsync(HttpRequest request,HttpResponse response)
         {
-           
-
             var path = request.Path.Value ;
 
             ReturnT ret = null;
